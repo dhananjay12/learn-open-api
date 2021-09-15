@@ -1,0 +1,37 @@
+openapi: "3.0.3"
+info:
+  title: Check Open API difference between 2 files
+  description: OpenAPI-Diff
+  version: 1.0.0
+servers:
+  - description: Prism mock server
+    url: http://localhost:4010
+tags:
+  - name: openapi-diff
+paths:
+  /check:
+    post:
+      summary: Upload 2 specs to check difference
+      operationId: check
+      tags:
+        - openapi-diff
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                spec1:
+                  type: string
+                  format: binary
+                spec2:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Null response
+          content:
+            text/plain:
+              schema:
+                type: string
+
