@@ -10,14 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class DifferenceService {
 
-    public String compare (String oldSpec, String newSpec){
+    public ChangedOpenApi compare (String oldSpec, String newSpec){
         ChangedOpenApi diff = null;
-        String render =null;
         try {
             diff = OpenApiCompare.fromContents(oldSpec, newSpec);
-            render = new MarkdownRender().render(diff);
         } catch (Exception e) {
         }
-        return render;
+        return diff;
     }
 }

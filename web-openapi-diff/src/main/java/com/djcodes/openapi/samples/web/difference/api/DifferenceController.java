@@ -10,6 +10,8 @@ import java.nio.charset.Charset;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.openapitools.openapidiff.core.model.ChangedOpenApi;
+import org.openapitools.openapidiff.core.output.MarkdownRender;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,8 +32,8 @@ public class DifferenceController implements OpenapiDiffApi{
     public ResponseEntity<String> check(MultipartFile spec1, MultipartFile spec2) {
         String oldSpec = parse(spec1);
         String newSpec = parse(spec2);
-        String result = differenceService.compare(oldSpec,newSpec);
-        return ResponseEntity.ok().body(result);
+        ChangedOpenApi result = differenceService.compare(oldSpec,newSpec);
+        return ResponseEntity.ok().body(new MarkdownRender().render(result));
 
     }
 
