@@ -9,6 +9,7 @@ servers:
     url: http://localhost:4010
 tags:
   - name: pet-store
+  - name: another-tag
 paths:
   /pet:
     post:

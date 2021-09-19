@@ -16,6 +16,7 @@ paths:
       operationId: createPet
       tags:
         - pet
+        - something
       requestBody:
         content:
           application/json:
