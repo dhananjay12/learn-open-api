@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: Currency Item API
+  version: 1.0.0
+  description: An API to manage items with currency properties
+
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the item
+        name:
+          type: string
+          description: The name of the item
+        amount:
+          description: The amount in the specified currency
+          type: string
+          minimum: -999999999999999999.99999
+          maximum: 999999999999999999.99999
+      required:
+        - name
+        - amount
+        - currency
+
+paths:
+  /items:
+    post:
+      summary: Create an item
+      description: Create a new item with a currency property
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '201':
+          description: Item created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Item created successfully
+                  itemId:
+                    type: string
+                    format: uuid
+                    example: 123e4567-e89b-12d3-a456-426614174000
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Invalid input data
+
+  /items/{itemId}:
+    get:
+      summary: Get an item by ID
+      description: Retrieve an item's details by its ID
+      parameters:
+        - name: itemId
+          in: path
+          description: The ID of the item to retrieve
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Item retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '404':
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Item not found

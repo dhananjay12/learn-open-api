@@ -9,12 +9,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>spring-microservice-demo</name>
+    <name>learn-open-api-root</name>
     <description>Demo project for spring microservices k8s</description>
 
     <modules>
         <module>openapi-diff-extend</module>
         <module>web-openapi-diff</module>
+        <module>sample-service</module>
     </modules>
 
 </project>
