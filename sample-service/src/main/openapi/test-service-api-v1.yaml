@@ -18,7 +18,6 @@ components:
           description: The name of the item
         price:
           type: string
-          format: number
           minimum: -999999999999999999.99999
           maximum: 999999999999999999.99999
           description: Price
@@ -30,7 +29,7 @@ paths:
   /items:
     post:
       summary: Create an item
-      description: Create a new item with a currency property
+      description: Create a new item with a item property
       requestBody:
         required: true
         content:
